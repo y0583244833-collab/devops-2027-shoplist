@@ -9,6 +9,13 @@ Browser → frontend (Nginx :80) → backend (Flask :5000) → postgres (Postgre
                                → stats (Node.js :3000) ───→ backend
 ```
 
+**מה האפליקציה יודעת לעשות:** להוסיף מוצר עם מחיר, כמות וקטגוריה; לערוך ולמחוק; לסמן מה כבר נקנה; לחפש ולמיין; ולהציג סטטיסטיקה לפי קטגוריה. למעלה בדף יש נורית לכל סרוויס, ירוקה כשהוא עונה ואדומה כשלא.
+
+| סרוויס | כתובות (API) |
+|---|---|
+| backend | `GET /health`, `GET /categories`, `GET /products`, `POST /products`, `PATCH /products/<id>`, `DELETE /products/<id>` |
+| stats | `GET /health`, `GET /stats` |
+
 ## לקבל את הקוד: fork ואז clone
 
 כל אחת עובדת על עותק משלה של הריפו, ב-GitHub שלה. ככה אפשר לשמור בו את העבודה, ולהשתמש בו בהמשך הקורס (CI/CD בשיעורים 7–8).
@@ -56,7 +63,7 @@ Browser → frontend (Nginx :80) → backend (Flask :5000) → postgres (Postgre
 |---|---|---|
 | 1 | מה זה DevOps, מיקרו-סרוויסים והכרת ShopList | [01-devops-intro](lessons/01-devops-intro/) |
 | 2 | Docker: images, containers ו-Dockerfile | [02-docker-basics](lessons/02-docker-basics/) |
-| 3 | Nginx, Docker Compose ושמירת נתונים | יעלה בהמשך |
+| 3 | Nginx, Docker Compose ושמירת נתונים | [03-docker-compose](lessons/03-docker-compose/) |
 | 4 | Kubernetes: מושגים, cluster ו-kubectl | יעלה בהמשך |
 | 5 | Kubernetes: Secret, ConfigMap, PVC והפעלת ShopList | יעלה בהמשך |
 | 6 | Helm | יעלה בהמשך |
