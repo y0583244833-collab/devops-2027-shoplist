@@ -1,1 +1,24 @@
+services:
+  greeter-he:
+    build:
+      context: ../../02-docker-basics/Dokcerfile
+    environment:
+      GREETING: Shalom
+    ports:
+      - "9001:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
 
+  greeter-en:
+    build:
+      context: ../../02-docker-basics/
+      
+      Dokcerfile
+    environment:
+      GREETING: Hello
+    ports:
+      - "9002:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
