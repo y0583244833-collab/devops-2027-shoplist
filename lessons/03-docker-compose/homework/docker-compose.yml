@@ -12,9 +12,8 @@ services:
 
   greeter-en:
     build:
-      context: ../../02-docker-basics/
-      
-      Dokcerfile
+      context: ../../02-docker-basics/Dokcerfile
+   
     environment:
       GREETING: Hello
     ports:
