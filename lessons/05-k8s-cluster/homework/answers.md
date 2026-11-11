@@ -1,10 +1,11 @@
+###chapter a
 |---|---|---|---|
-| API server | | | |
-| etcd | | | |
-| scheduler | | | |
-| controller manager | | | |
-| kubelet | | | |
-| container runtime | | | |
-| kube-proxy | | | |
-| coredns | | | |
+| API server |הנהלה |כל בקשה, מ-kubectl או מרכיב אחר, עוברת דרכ |הדלפק שבו מוסרים כל הזמנה |
+| etcd | הנהלה| 	שומר את כל המידע על ה-cluster: מה צריך לרוץ ומה רץ בפועל|פנקס ההזמנות |
+| scheduler |הנהלה | מחליט על איזה node ירוץ כל pod חדש| מנהלת המשמרת שמחליטה איזו עמדה תכין כל עוגה|
+| controller manager | הנהלה| משווה כל הזמן בין המצב הרצוי למצב בפועל, ומתקן כשיש פער| המפקחת שדואגת שתמיד  כמות רצויה של עוגות בוויטרינה|
+| kubelet |כל node | מפעיל את ה-pods ששובצו ל-node שלו, משגיח עליהם ומדווח| |
+| container runtime |כל node |מריץ את ה-containers בפועל | התנור|
+| kube-proxy |כל node | מעביר פנייה ל-Service לאחד ה-pods שמאחוריו|המרכזייה שמעבירה שיחה לעמדה הנכונה |
+| coredns | כל node| כ-pods ב-kube-system|מתרגם שם של Service לכתובת, כמו שמות השירותים ב-Compose  |ספר הטלפונים
 
