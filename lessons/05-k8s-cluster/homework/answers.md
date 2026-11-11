@@ -9,3 +9,21 @@
 | kube-proxy |כל node | מעביר פנייה ל-Service לאחד ה-pods שמאחוריו|המרכזייה שמעבירה שיחה לעמדה הנכונה |
 | coredns | כל node| כ-pods ב-kube-system|מתרגם שם של Service לכתובת, כמו שמות השירותים ב-Compose  |ספר הטלפונים
 
+-----
+1
+kubctl  שןלח בקשה לAPI ששומר בETCD שווב צריך 4 עותקים קונטרולר הקונטרולר מנגר רואה שצריך 4  ויש רק 2 ויוצר עוד 2 חדשים
+ועכשיו הסקדיולר בוחר לכל NODE חדש PODE  שיש בו מקום 
+ה   KUBEELET מורה ל container runtim להפעיל את הקונטיינר ומדווחלAPI שהPOD RUNNING
+
+2
+kubelet מזהה שהקונטיינר קרס ומפעיל מחדש בתוך אותו פוד   העמודה RESTARTS גדלה ואם השירות קורס שוב ושוב  הKUBEBELET יחכה יותר זמן בין ניסיונות,
+אם מוחקים את הפוד לKUBELET אין מה להפעיל מחדש ואז הcontroller רואה שחסר פוד לעומת מה שנדרש ויוצר פוד חדש עם שם חדש scheduler משבף לנוד ואז מפעיל אותו הKUBEELET
+3
+
+ה-kubelet ב-node 2 מפסיק לדווח, וה-controller manager מסמן את ה-node כ-NotReady. אחרי זמן המתנה  ה-controller manager יוצר pods חלופיים, וה-scheduler משבץ אותם ב-node 1 וב-node 3. pod שלא היה שייך ל-Deployment לא חוזר. ב-Docker Desktop יש node אחד, וגם ההנהלה רצה עליו, כך שאם המחשב נכבה הכל נופל ואין לאן להעביר את ה-pods. כשהמחשב עולה מחדש, ה-cluster קורא מ-etcd מה צריך לרוץ ומפעיל את זה שוב.
+4
+r לא יעבוד, כי ה-images קיימים רק במחשב שבו נבנו, ולמחשבים של EKS אין אותם. לכן ה-pods ייכשלו עם ErrImageNeverPull. צריך לדחוף את ה-images ל-registry כמו ECR או Docker H
+5
+
+kubectl run יוצר pod בודד שאף controller לא אחראי עליו. לא כתוב בשום מקום שהוא צריך להתקיים, ולכן אחרי מחיקה אף אחד לא מחזיר אותו. ה-pod של web שייך ל-Deployment, שבו כתוב כמה pods צריכים לרוץ. כשאחד נמחק, ה-controller manager רואה שחסר pod ויוצר חדש. כדי ש-stats יחזור תמיד, צריך להריץ אותו כ-Deployment, גם אם עם replicas: 1 בלבד.
+
